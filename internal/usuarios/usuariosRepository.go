@@ -3,6 +3,7 @@ package usuarios
 import (
 	"errors"
 
+	"github.com/jfcheca/Gymback/internal/domain"
 )
 
 type Repository interface {

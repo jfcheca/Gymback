@@ -2,37 +2,30 @@ package handler
 
 import (
 	"errors"
-	"net/http"
-//	"os"
-	"strconv"
-//	"strings"
-
-	//	"text/template/parse"
-
+	"gimnasio/internal/domain"
+	"gimnasio/internal/usuarios"
+	"gimnasio/pkg/web"
 	"github.com/gin-gonic/gin"
-	"github.com/jfcheca/Checa_Budai_FinalBack3/internal/domain"
-	"github.com/jfcheca/Checa_Budai_FinalBack3/internal/odontologo"
-	"github.com/jfcheca/Checa_Budai_FinalBack3/pkg/web"
 )
 
-type odontoHandler struct {
-	s odontologo.Service
+type usuariosHandler struct {
+	s usuarios.Service
 }
 
 // NewProductHandler crea un nuevo controller de productos
-func NewProductHandler(s odontologo.Service) *odontoHandler {
-	return &odontoHandler{
+func NewUsuariosHandler(s usuarios.Service) *usuariosHandler {
+	return &usuariosHandler{
 		s: s,
 	}
 }
 
-var listaOdontologo []domain.Odontologo
+var listaOdontologo []domain.Usuarios
 var ultimoID int = 1
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CREA NUEVO ODONTOLOGO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-func (h *odontoHandler) Post() gin.HandlerFunc {
+func (h *usuariosHandler) Post() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var odonto domain.Odontologo
+		var odonto domain.Usuarios
 		odonto.ID = ultimoID
 		ultimoID++
 		err := c.ShouldBindJSON(&odonto)
@@ -41,7 +34,7 @@ func (h *odontoHandler) Post() gin.HandlerFunc {
 			return
 		}
 		// Crear el odontólogo utilizando el servicio
-		createdOdonto, err := h.s.Create(odonto)
+		createdOdonto, err := h.s.CrearUsuario(odonto)
 		if err != nil {
 			web.Failure(c, 500, errors.New("failed to create odontologo"))
 			return

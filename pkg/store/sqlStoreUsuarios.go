@@ -2,9 +2,6 @@ package store
 
 import (
 	"database/sql"
-	"errors"
-	"fmt"
-	"github.com/jfcheca/Checa_Budai_FinalBack3/internal/domain"
 	"log"
 )
 

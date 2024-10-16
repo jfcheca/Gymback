@@ -1,12 +1,10 @@
 package usuarios
 
-import "github.com/jfcheca/StreetFlow/internal/domain"
+import "github.com/jfcheca/Gymback/internal/domain"
 
 type Service interface {
 
 	CrearUsuario(p domain.Usuarios) (domain.Usuarios, error)
-
-
 
 }
 
